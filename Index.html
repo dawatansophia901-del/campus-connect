@@ -1,0 +1,902 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Connect | Student Announcement Portal</title>
+
+    <!-- Correct CSS filename -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= LOGIN PAGE ================= -->
+
+<section id="loginPage" class="login-screen">
+
+    <div class="login-box">
+
+        <div class="cap-logo">🎓</div>
+
+        <h1>CAMPUS CONNECT</h1>
+        <p class="login-subtitle">STUDENT ANNOUNCEMENT PORTAL</p>
+
+        <div class="login-heading">
+            <h2>Welcome Back!</h2>
+            <p>Sign in to access your campus updates.</p>
+        </div>
+
+        <form id="loginForm">
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                placeholder="Enter your username"
+                required
+            >
+
+            <label for="password">Password</label>
+
+            <div class="password-field">
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="button" id="togglePassword">
+                    Show
+                </button>
+            </div>
+
+            <button type="submit" class="primary-button">
+                Login
+            </button>
+
+            <p id="loginError" class="error"></p>
+
+        </form>
+
+        <div class="login-bottom">
+            <p>Connecting Students Through Information.</p>
+            <small>© 2026 Campus Connect</small>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MAIN WEBSITE ================= -->
+
+<div id="mainWebsite" class="hidden">
+
+    <!-- HEADER -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-logo">🎓</div>
+
+            <div>
+                <h2>Campus Connect</h2>
+                <p>STUDENT ANNOUNCEMENT PORTAL</p>
+            </div>
+
+        </div>
+
+        <div class="header-actions">
+
+            <span class="online-status">
+                ● Online
+            </span>
+
+            <button
+                class="menu-button"
+                id="menuButton"
+                type="button"
+            >
+                ☰
+            </button>
+
+            <button
+                class="logout-button"
+                id="logoutButton"
+                type="button"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN LAYOUT -->
+
+    <div class="layout">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <p class="sidebar-label">MAIN MENU</p>
+
+            <button class="nav-item active" data-page="dashboard">
+                <span>⌂</span> Dashboard
+            </button>
+
+            <button class="nav-item" data-page="announcements">
+                <span>📢</span> Announcements
+            </button>
+
+            <button class="nav-item" data-page="events">
+                <span>📅</span> School Events
+            </button>
+
+            <p class="sidebar-label">ACCOUNT</p>
+
+            <button class="nav-item" data-page="profile">
+                <span>👤</span> My Profile
+            </button>
+
+            <button class="nav-item" data-page="admin">
+                <span>⚙️</span> Administration
+            </button>
+
+            <div class="sidebar-bottom">
+
+                <div class="mini-cap">🎓</div>
+
+                <p>Campus Connect</p>
+
+                <small>Stay Informed. Stay Connected.</small>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+
+        <main class="main-content">
+
+
+            <!-- ================= DASHBOARD ================= -->
+
+            <section id="dashboard" class="page active">
+
+                <div class="hero">
+
+                    <div class="hero-top">
+
+                        <div>
+
+                            <p>STUDENT PORTAL</p>
+
+                            <h1>Welcome to<br>Campus Connect!</h1>
+
+                            <p class="hero-description">
+                                Your centralized source for school
+                                announcements, activities, and updates.
+                            </p>
+
+                        </div>
+
+                        <div class="hero-cap">🎓</div>
+
+                    </div>
+
+                    <div class="search-box">
+
+                        <span>⌕</span>
+
+                        <input
+                            type="text"
+                            id="dashboardSearch"
+                            placeholder="Search announcements..."
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-heading dashboard-heading">
+                    <h2>Campus Overview</h2>
+                </div>
+
+
+                <div class="stats-grid">
+
+                    <div class="stat-box">
+
+                        <div class="stat-icon">📢</div>
+
+                        <h2 id="announcementCount">0</h2>
+
+                        <p>Total Announcements</p>
+
+                    </div>
+
+
+                    <div class="stat-box">
+
+                        <div class="stat-icon">📅</div>
+
+                        <h2 id="eventCount">0</h2>
+
+                        <p>Upcoming Events</p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-heading">
+
+                    <h2>Latest Announcements</h2>
+
+                    <button class="text-button" data-goto="announcements">
+                        View All →
+                    </button>
+
+                </div>
+
+
+                <div id="dashboardAnnouncements" class="announcement-list">
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= ANNOUNCEMENTS ================= -->
+
+            <section id="announcements" class="page">
+
+                <div class="page-heading">
+
+                    <p>CAMPUS UPDATES</p>
+
+                    <h1>Announcements</h1>
+
+                    <span>
+                        Stay updated with the latest school information.
+                    </span>
+
+                </div>
+
+                <input
+                    type="text"
+                    id="announcementSearch"
+                    class="page-search"
+                    placeholder="Search announcements..."
+                >
+
+                <div id="announcementList" class="announcement-list">
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= EVENTS ================= -->
+
+            <section id="events" class="page">
+
+                <div class="page-heading">
+
+                    <p>CAMPUS ACTIVITIES</p>
+
+                    <h1>School Events</h1>
+
+                    <span>
+                        Keep track of upcoming school activities.
+                    </span>
+
+                </div>
+
+                <div class="content-card">
+
+                    <h2>Upcoming Events</h2>
+
+                    <div id="eventList">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PROFILE ================= -->
+
+            <section id="profile" class="page">
+
+                <div class="page-heading">
+
+                    <p>STUDENT ACCOUNT</p>
+
+                    <h1>My Profile</h1>
+
+                    <span>
+                        View your account information.
+                    </span>
+
+                </div>
+
+                <div class="content-card profile-card">
+
+                    <div class="profile-avatar">👤</div>
+
+                    <h2 id="profileName">Student</h2>
+
+                    <p>Campus Connect Student</p>
+
+                    <div class="profile-info">
+
+                        <p>
+                            <strong>Username:</strong>
+                            <span id="profileUsername">student</span>
+                        </p>
+
+                        <p>
+                            <strong>Account Type:</strong>
+                            Student
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= ADMIN ================= -->
+
+            <section id="admin" class="page">
+
+                <div class="page-heading">
+
+                    <p>PORTAL MANAGEMENT</p>
+
+                    <h1>Administration</h1>
+
+                    <span>
+                        Create and publish campus announcements.
+                    </span>
+
+                </div>
+
+                <div class="content-card">
+
+                    <h2>Create Announcement</h2>
+
+                    <p class="admin-note">
+                        Fill in the details below to publish a new announcement.
+                    </p>
+
+                    <form id="adminForm" class="admin-form">
+
+                        <label for="announcementTitle">
+                            Announcement Title
+                        </label>
+
+                        <input
+                            type="text"
+                            id="announcementTitle"
+                            placeholder="Enter announcement title"
+                            required
+                        >
+
+                        <label for="announcementCategory">
+                            Category
+                        </label>
+
+                        <select id="announcementCategory" required>
+
+                            <option value="important">Important</option>
+
+                            <option value="academic">Academic</option>
+
+                            <option value="activities">Activities</option>
+
+                        </select>
+
+                        <label for="announcementDescription">
+                            Description
+                        </label>
+
+                        <textarea
+                            id="announcementDescription"
+                            placeholder="Write your announcement..."
+                            required
+                        ></textarea>
+
+                        <button type="submit" class="primary-button">
+                            Publish Announcement
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="content-card">
+
+                    <h2 class="published-title">
+                        Published Announcements
+                    </h2>
+
+                    <div id="adminAnnouncementList">
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Campus Connect |
+            Student Announcement Portal
+        </p>
+
+        <small>
+            Stay Informed. Stay Connected.
+        </small>
+
+    </footer>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+const loginPage = document.getElementById("loginPage");
+const mainWebsite = document.getElementById("mainWebsite");
+
+const loginForm = document.getElementById("loginForm");
+const loginError = document.getElementById("loginError");
+
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+
+const togglePassword = document.getElementById("togglePassword");
+
+let currentUser = "";
+
+let announcements = [
+    {
+        title: "Welcome to Campus Connect",
+        category: "important",
+        description: "Welcome to our centralized student announcement portal. Stay informed about important school updates and activities.",
+        date: "November 24, 2026"
+    },
+    {
+        title: "Academic Updates",
+        category: "academic",
+        description: "Students are encouraged to regularly check official school announcements for academic information.",
+        date: "November 24, 2026"
+    },
+    {
+        title: "Upcoming School Activities",
+        category: "activities",
+        description: "Stay updated with upcoming campus activities and student programs.",
+        date: "November 24, 2026"
+    }
+];
+
+let events = [
+    {
+        day: "25",
+        month: "NOV",
+        title: "Student Academic Updates",
+        description: "Check the latest academic announcements."
+    },
+    {
+        day: "28",
+        month: "NOV",
+        title: "Campus Activities",
+        description: "Stay informed about school activities."
+    }
+];
+
+
+// PASSWORD VISIBILITY
+
+togglePassword.addEventListener("click", function() {
+
+    if (passwordInput.type === "password") {
+
+        passwordInput.type = "text";
+        togglePassword.textContent = "Hide";
+
+    } else {
+
+        passwordInput.type = "password";
+        togglePassword.textContent = "Show";
+
+    }
+
+});
+
+
+// LOGIN
+
+loginForm.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!username || !password) {
+
+        loginError.textContent = "Please complete all fields.";
+        return;
+
+    }
+
+    currentUser = username;
+
+    localStorage.setItem("campusConnectUser", username);
+
+    loginError.textContent = "";
+
+    document.getElementById("profileName").textContent = username;
+    document.getElementById("profileUsername").textContent = username;
+
+    loginPage.classList.add("hidden");
+    mainWebsite.classList.remove("hidden");
+
+    renderAnnouncements();
+    renderEvents();
+
+});
+
+
+// LOGOUT
+
+document.getElementById("logoutButton").addEventListener("click", function() {
+
+    mainWebsite.classList.add("hidden");
+    loginPage.classList.remove("hidden");
+
+    loginForm.reset();
+
+    currentUser = "";
+  localStorage.removeItem("campusConnectUser");
+
+});
+
+
+// NAVIGATION
+
+function showPage(pageId) {
+
+    document.querySelectorAll(".page").forEach(function(page) {
+
+        page.classList.remove("active");
+
+    });
+
+    document.querySelectorAll(".nav-item").forEach(function(button) {
+
+        button.classList.remove("active");
+
+    });
+
+    const selectedPage = document.getElementById(pageId);
+
+    if (selectedPage) {
+
+        selectedPage.classList.add("active");
+
+    }
+
+    const selectedButton = document.querySelector(
+        '.nav-item[data-page="' + pageId + '"]'
+    );
+
+    if (selectedButton) {
+
+        selectedButton.classList.add("active");
+
+    }
+
+    document.getElementById("sidebar").classList.remove("open");
+
+}
+
+
+document.querySelectorAll(".nav-item").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        showPage(button.dataset.page);
+
+    });
+
+});
+
+
+document.querySelectorAll("[data-goto]").forEach(function(button) {
+
+    button.addEventListener("click", function() {
+
+        showPage(button.dataset.goto);
+
+    });
+
+});
+
+
+// MOBILE SIDEBAR
+
+document.getElementById("menuButton").addEventListener("click", function() {
+
+    document.getElementById("sidebar").classList.toggle("open");
+
+});
+
+
+// ANNOUNCEMENTS
+
+function renderAnnouncements(search = "") {
+
+    const announcementList = document.getElementById("announcementList");
+
+    const dashboardList = document.getElementById("dashboardAnnouncements");
+
+    const adminList = document.getElementById("adminAnnouncementList");
+
+    announcementList.innerHTML = "";
+    dashboardList.innerHTML = "";
+    adminList.innerHTML = "";
+
+    const filtered = announcements.filter(function(item) {
+
+        return (
+            item.title.toLowerCase().includes(search.toLowerCase()) ||
+            item.description.toLowerCase().includes(search.toLowerCase())
+        );
+
+    });
+
+    filtered.forEach(function(item, index) {
+
+        const card = document.createElement("article");
+
+        card.className = "announcement-card";
+
+        const tag = document.createElement("span");
+        tag.className = "tag " + item.category;
+        tag.textContent = item.category.toUpperCase();
+
+        const title = document.createElement("h3");
+        title.textContent = item.title;
+
+        const description = document.createElement("p");
+        description.textContent = item.description;
+
+        const date = document.createElement("small");
+        date.textContent = item.date;
+
+        card.append(tag, title, description, date);
+
+        announcementList.appendChild(card);
+
+        if (index < 4) {
+
+            dashboardList.appendChild(card.cloneNode(true));
+
+        }
+
+        const adminRow = document.createElement("div");
+        adminRow.className = "event-row";
+
+        const adminDetails = document.createElement("div");
+
+        const adminTitle = document.createElement("h3");
+        adminTitle.textContent = item.title;
+
+        const adminDate = document.createElement("p");
+        adminDate.textContent = item.date;
+
+        adminDetails.append(adminTitle, adminDate);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "logout-button";
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+
+        deleteButton.addEventListener("click", function() {
+
+            if (confirm("Delete this announcement?")) {
+
+                announcements.splice(
+                    announcements.indexOf(item),
+                    1
+                );
+
+                renderAnnouncements();
+                updateStatistics();
+
+            }
+
+        });
+
+        adminRow.append(adminDetails, deleteButton);
+
+        adminList.appendChild(adminRow);
+
+    });
+
+    if (filtered.length === 0) {
+
+        announcementList.textContent = "No announcements found.";
+
+        dashboardList.textContent = "No announcements available.";
+
+    }
+
+    updateStatistics();
+
+}
+
+
+// SEARCH
+
+document.getElementById("announcementSearch").addEventListener("input", function() {
+
+    renderAnnouncements(this.value);
+
+});
+
+document.getElementById("dashboardSearch").addEventListener("input", function() {
+
+    showPage("announcements");
+
+    document.getElementById("announcementSearch").value = this.value;
+
+    renderAnnouncements(this.value);
+
+});
+
+
+// ADMIN PUBLISH
+
+document.getElementById("adminForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const title = document.getElementById("announcementTitle").value.trim();
+
+    const category = document.getElementById("announcementCategory").value;
+
+    const description = document.getElementById("announcementDescription").value.trim();
+
+    if (!title || !description) {
+
+        alert("Please complete all fields.");
+
+        return;
+
+    }
+
+    announcements.unshift({
+
+        title: title,
+        category: category,
+        description: description,
+        date: new Date().toLocaleDateString()
+
+    });
+
+    this.reset();
+
+    renderAnnouncements();
+
+    alert("Announcement published successfully!");
+
+});
+
+
+// EVENTS
+
+function renderEvents() {
+
+    const eventList = document.getElementById("eventList");
+
+    eventList.innerHTML = "";
+
+    events.forEach(function(event) {
+
+        const row = document.createElement("div");
+
+        row.className = "event-row";
+
+        const date = document.createElement("div");
+
+        date.className = "event-date";
+
+        date.textContent = event.day;
+
+        const details = document.createElement("div");
+
+        const title = document.createElement("h3");
+
+        title.textContent = event.title;
+
+        const description = document.createElement("p");
+
+        description.textContent = event.month + " | " + event.description;
+
+        details.append(title, description);
+
+        row.append(date, details);
+
+        eventList.appendChild(row);
+
+    });
+
+    updateStatistics();
+
+}
+
+
+// STATISTICS
+
+function updateStatistics() {
+
+    document.getElementById("announcementCount").textContent =
+        announcements.length;
+
+    document.getElementById("eventCount").textContent =
+        events.length;
+
+}
+
+
+// INITIALIZE
+
+renderAnnouncements();
+renderEvents();
+
+  renderAnnouncements();
+renderEvents();
+
+const savedUser = localStorage.getItem("campusConnectUser");
+
+if (savedUser) {
+    currentUser = savedUser;
+
+    document.getElementById("profileName").textContent = savedUser;
+    document.getElementById("profileUsername").textContent = savedUser;
+
+    loginPage.classList.add("hidden");
+    mainWebsite.classList.remove("hidden");
+}
+  
+</script>
+
+</body>
+</html>
